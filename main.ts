@@ -5,7 +5,9 @@ import * as io from "npm:@actions/io";
 import * as tc from "npm:@actions/tool-cache";
 import * as path from "node:path";
 import process from "node:process";
-import { createWriteStream } from "node:fs"
+import { join } from "node:path";
+import { createWriteStream } from "node:fs";
+import { pipeline } from "node:stream/promises";
 
 process.env.INPUT_VERSION = process.env.INPUT_LLVM_VERSION;
 if (process.env.INPUT_VERSION === "latest") {
@@ -506,6 +508,7 @@ async function main() {
   } catch (error: any) {
     console.error(error.stack);
     core.setFailed(error.message);
+    process.exitCode = 1;
   }
 }
 await main();
