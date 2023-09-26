@@ -5,6 +5,7 @@ import * as io from "npm:@actions/io";
 import * as tc from "npm:@actions/tool-cache";
 import * as path from "node:path";
 import process from "node:process";
+import { createWriteStream } from "node:fs"
 
 process.env.INPUT_VERSION = process.env.INPUT_LLVM_VERSION;
 if (process.env.INPUT_VERSION === "latest") {
@@ -13,6 +14,17 @@ if (process.env.INPUT_VERSION === "latest") {
 }
 
 process.env.INPUT_ENV = process.env.INPUT_SET_ENV;
+
+async function downloadTool(url: string): string {
+  const dest = join(
+    process.env.RUNNER_TEMP,
+    Math.random().toString() + url.match(/\.[^/]+$/)[0]
+  );
+  core.debug(`Downloading ${url} to ${dest}`);
+  const response = await fetch(url);
+  await pipeline(response.body, createWriteStream(dest));
+  return dest;
+}
 
 export interface Options {
   version: string;
@@ -423,7 +435,7 @@ async function install(options: Options): Promise<void> {
     `Installing LLVM and Clang ${options.version} (${specificVersion})...`
   );
   console.log(`Downloading and extracting '${url}'...`);
-  const archive = await tc.downloadTool(url, "", options.auth);
+  const archive = await downloadTool(url, "", options.auth);
 
   let exit;
   if (platform === "win32") {
