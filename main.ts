@@ -502,13 +502,4 @@ async function run(options: Options): Promise<void> {
   }
 }
 
-async function main() {
-  try {
-    await run(getOptions());
-  } catch (error: any) {
-    console.error(error.stack);
-    core.setFailed(error.message);
-    process.exitCode = 1;
-  }
-}
-await main();
+await run(getOptions());
