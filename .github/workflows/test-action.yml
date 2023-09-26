@@ -1,0 +1,19 @@
+name: Test action
+on:
+  push:
+    branches: "main"
+    paths:
+      - main.ts
+      - action.yml
+      - .github/workflows/test-action.yml
+jobs:
+  test-action:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./
+      - run: clang --version
