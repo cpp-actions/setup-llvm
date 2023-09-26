@@ -7,6 +7,10 @@ import * as path from "node:path";
 import process from "node:process";
 
 process.env.INPUT_VERSION = process.env.INPUT_LLVM_VERSION;
+if (process.env.INPUT_VERSION === "latest") {
+  process.env.INPUT_VERSION = "17";
+}
+
 process.env.INPUT_ENV = process.env.INPUT_SET_ENV;
 
 export interface Options {
