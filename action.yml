@@ -1,5 +1,5 @@
-name: Setup LLVM & Clang environment
-description: 🚀 Installs LLVM/Clang and friends
+name: Setup LLVM & Clang toolchain
+description: 🚀 Installs LLVM/Clang and friends for GitHub Actions
 
 inputs:
   llvm-version:
