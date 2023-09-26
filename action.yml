@@ -20,7 +20,7 @@ runs:
     - shell: bash
       run: |
         "$GITHUB_ACTION_PATH/.deno/bin/deno" \
-          run -Aq "$GITHUB_ACTION_PATH/main.sh"
+          run -Aq "$GITHUB_ACTION_PATH/main.ts"
       env:
         INPUT_LLVM_VERSION: ${{ inputs.llvm-version }}
         INPUT_SET_BIN: ${{ inputs.set-bin }}
