@@ -21,7 +21,7 @@ async function downloadTool(url: string): string {
 }
 
 let version = core.getInput("llvm-version")
-if (!/\d+\.\d+\.\d+/.test(version)) {
+if (!/\d+/.test(version)) {
   const response = await fetch("https://releases.llvm.org")
   const text = await response.text()
   const releases = eval(text.match(/var RELEASES = (.*?);/s)[1])
@@ -30,13 +30,13 @@ if (!/\d+\.\d+\.\d+/.test(version)) {
     version = "*"
   }
   version = semver.maxSatisfying(versions, version);
+  version = version.match(/\d+/)[0]
 }
 
 if (process.platform === "linux" && (process.arch === "x64" || process.arch === "arm64")) {
   let path = await downloadTool("https://apt.llvm.org/llvm.sh")
   await chmod(path, 0o775)
   const $$ = $({ stdio: "inherit" })
-  await $$`sudo apt-get update`
   await $$`sudo ${path} ${version}`
 } else if (process.platform === "darwin" && process.arch === "x64") {
   throw new DOMException("macOS not implemented yet", "NotSupportedError")
