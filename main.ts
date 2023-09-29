@@ -36,6 +36,7 @@ if (process.platform === "linux" && (process.arch === "x64" || process.arch === 
   let path = await downloadTool("https://apt.llvm.org/llvm.sh")
   await chmod(path, 0o775)
   const $$ = $({ stdio: "inherit" })
+  await $$`sudo apt-get update`
   await $$`sudo ${path} ${version}`
 } else if (process.platform === "darwin" && process.arch === "x64") {
   throw new DOMException("macOS not implemented yet", "NotSupportedError")
@@ -43,9 +44,4 @@ if (process.platform === "linux" && (process.arch === "x64" || process.arch === 
   throw new DOMException("Windows not implemented yet", "NotSupportedError")
 } else {
   throw new DOMException(`${process.platform}/${process.arch} is not supported`, "NotSupportedError")
-}
-
-if (core.getBooleanInput("set-env")) {
-  core.exportVariable("CC", "clang")
-  core.exportVariable("CXX", "clang++")
 }
