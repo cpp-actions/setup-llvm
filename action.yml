@@ -2,7 +2,7 @@ name: Setup LLVM & Clang toolchain
 description: 🚀 Installs LLVM/Clang and friends for GitHub Actions
 
 inputs:
-  llvm-version:
+  llvm-toolchain-version:
     default: latest
   set-bin:
     default: false
@@ -22,6 +22,6 @@ runs:
         "$GITHUB_ACTION_PATH/.deno/bin/deno" \
           run -Aq "$GITHUB_ACTION_PATH/main.ts"
       env:
-        INPUT_LLVM-VERSION: ${{ inputs.llvm-version }}
-        INPUT_SET_BIN: ${{ inputs.set-bin }}
-        INPUT_SET_ENV: ${{ inputs.set-env }}
+        INPUT_LLVM-TOOLCHAIN-VERSION: ${{ inputs.llvm-toolchain-version }}
+        INPUT_SET-BIN: ${{ inputs.set-bin }}
+        INPUT_SET-ENV: ${{ inputs.set-env }}
