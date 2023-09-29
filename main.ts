@@ -7,6 +7,7 @@ import { createWriteStream } from "node:fs";
 import { chmod } from "node:fs/promises";
 import { pipeline } from "node:stream/promises";
 import semver from "npm:semver";
+import { $ } from "npm:execa";
 
 async function downloadTool(url: string): string {
   const dest = join(
