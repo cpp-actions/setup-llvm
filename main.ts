@@ -32,7 +32,7 @@ if (!/\d+\.\d+\.\d+/.test(version)) {
 }
 
 if (process.platform === "linux" && (process.arch === "x64" || process.arch === "arm64")) {
-  let path = downloadTool("https://apt.llvm.org/llvm.sh")
+  let path = await downloadTool("https://apt.llvm.org/llvm.sh")
   await chmod(path, 0o775)
   const $$ = $({ stdio: "inherit" })
   await $$`sudo ${path} ${version}`
