@@ -16,4 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./
+        with:
+          llvm-version: "16"
       - run: clang --version
