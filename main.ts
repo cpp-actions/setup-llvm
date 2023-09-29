@@ -4,6 +4,7 @@ import * as tc from "npm:@actions/tool-cache";
 import process from "node:process";
 import { join } from "node:path";
 import { createWriteStream } from "node:fs";
+import { chmod } from "node:fs/promises";
 import { pipeline } from "node:stream/promises";
 import semver from "npm:semver";
 
