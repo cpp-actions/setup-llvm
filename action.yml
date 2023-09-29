@@ -5,7 +5,7 @@ inputs:
   llvm-toolchain-version:
     default: latest
   set-env:
-    default: true
+    default: false
 
 runs:
   using: composite
