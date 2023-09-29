@@ -4,8 +4,6 @@ description: 🚀 Installs LLVM/Clang and friends for GitHub Actions
 inputs:
   llvm-version:
     default: latest
-  set-env:
-    default: false
 
 runs:
   using: composite
@@ -21,4 +19,3 @@ runs:
           run -Aq "$GITHUB_ACTION_PATH/main.ts"
       env:
         INPUT_LLVM-VERSION: ${{ inputs.llvm-version }}
-        INPUT_SET-ENV: ${{ inputs.set-env }}
